@@ -1,6 +1,28 @@
-# Student Enrollment & Grade Record System
+<div align="center">
 
-A C++ console application planned to support student enrollment, subject selection, and final grade recording for a school registrar.
+<p><strong>CPE010 · DATA STRUCTURES AND ALGORITHMS</strong></p>
+
+<h1>Student Enrollment<br>&amp; Grade Record System</h1>
+
+<p>A C++ console application planned to support student enrollment, subject selection,<br>and final grade recording for a school registrar.</p>
+
+<p>
+<img src="https://img.shields.io/badge/Language-C%2B%2B-00599C?style=for-the-badge" alt="Language: C++">
+<img src="https://img.shields.io/badge/Interface-Console-334155?style=for-the-badge" alt="Interface: Console">
+<img src="https://img.shields.io/badge/Stage-Design-0F766E?style=for-the-badge" alt="Stage: Design">
+</p>
+
+<p>
+<a href="#overview">Overview</a> &nbsp;·&nbsp;
+<a href="#planned-features">Features</a> &nbsp;·&nbsp;
+<a href="#data-structures-and-algorithms">Algorithms</a> &nbsp;·&nbsp;
+<a href="#system-rules">System Rules</a> &nbsp;·&nbsp;
+<a href="#development-plan">Development Plan</a>
+</p>
+
+</div>
+
+---
 
 > **Status:** Documentation and design are in progress. Implementation has not started.
 
@@ -10,48 +32,52 @@ This project applies arrays, a stack, a queue, linear search, and insertion sort
 
 ## Planned Features
 
-- Add an enrollment request with student details and selected subjects.
-- Process enrollment requests in first-in, first-out order.
-- Enter or update one final grade per enrolled subject.
-- Search for a student by student number.
-- Display enrolled students alphabetically by name.
-- Undo the latest grade change.
+| Feature | Planned Behavior |
+| :--- | :--- |
+| **Enrollment** | Add an enrollment request with student details and selected subjects. |
+| **Request Processing** | Process enrollment requests in first-in, first-out order. |
+| **Grade Management** | Enter or update one final grade per enrolled subject. |
+| **Student Search** | Search for a student by student number. |
+| **Alphabetical Records** | Display enrolled students alphabetically by name. |
+| **Grade Undo** | Undo the latest grade change. |
 
 ## Data Structures and Algorithms
 
 | Topic | Planned Application |
-| --- | --- |
-| Arrays | Store student details, selected subjects, and grades |
-| Stack | Restore the previous grade when undoing a change |
-| Queue | Process enrollment requests in arrival order |
-| Linear search | Find a student by student number |
-| Insertion sort | Arrange student records alphabetically |
+| :--- | :--- |
+| **Arrays** | Store student details, selected subjects, and grades |
+| **Stack** | Restore the previous grade when undoing a change |
+| **Queue** | Process enrollment requests in arrival order |
+| **Linear search** | Find a student by student number |
+| **Insertion sort** | Arrange student records alphabetically |
 
 ## System Rules
 
 | Item | Planned Behavior |
-| --- | --- |
-| Student numbers | Entered manually; duplicates are rejected |
-| Available subjects | English, Mathematics, and Science |
-| Subject selection | One or more available subjects per student |
-| Grade entry | One final grade per enrolled subject |
-| Grade range | 0–100 |
-| Passing grade | 75 |
-| Unassigned grades | Displayed as **Not yet graded** |
-| Users | One registrar user |
-| Data storage | In memory for the current session |
+| :--- | :--- |
+| **Student numbers** | Entered manually; duplicates are rejected |
+| **Available subjects** | English, Mathematics, and Science |
+| **Subject selection** | One or more available subjects per student |
+| **Grade entry** | One final grade per enrolled subject |
+| **Grade range** | **0–100** |
+| **Passing grade** | **75** |
+| **Unassigned grades** | Displayed as **Not yet graded** |
+| **Users** | One registrar user |
+| **Data storage** | In memory for the current session |
 
-Records are cleared when the program closes.
+> Records are cleared when the program closes.
 
 ## Development Plan
 
-1. Complete the theoretical documentation and system design.
-2. Implement student records and the main menu.
-3. Implement enrollment processing with a queue.
-4. Implement grade entry and stack-based undo.
-5. Implement searching, sorting, and input validation.
-6. Test the program and capture actual outputs.
-7. Measure performance and complete the documentation.
+| Phase | Work |
+| :---: | :--- |
+| **01** | Complete the theoretical documentation and system design. |
+| **02** | Implement student records and the main menu. |
+| **03** | Implement enrollment processing with a queue. |
+| **04** | Implement grade entry and stack-based undo. |
+| **05** | Implement searching, sorting, and input validation. |
+| **06** | Test the program and capture actual outputs. |
+| **07** | Measure performance and complete the documentation. |
 
 ## Performance Analysis
 
@@ -60,3 +86,9 @@ The project will examine the best, average, and worst-case time complexity and t
 ## Build and Run
 
 Build and run instructions will be added after implementation.
+
+---
+
+<div align="center">
+<sub><strong>C++</strong> &nbsp;·&nbsp; Arrays &nbsp;·&nbsp; Stack &nbsp;·&nbsp; Queue &nbsp;·&nbsp; Linear Search &nbsp;·&nbsp; Insertion Sort</sub>
+</div>
