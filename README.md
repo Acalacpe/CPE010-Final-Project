@@ -69,27 +69,15 @@ This project applies arrays, a stack, a queue, linear search, and insertion sort
 
 ## Development Plan
 
-The phases follow the report's sections, with theoretical documentation completed before coding. Phase numbers show the work order; section numbers refer to the report.
-
-| Phase | Document Section | Work |
-| :---: | :--- | :--- |
-| **01** | **Project Information** | Set the project title, business process, and project details. Keep placeholders for missing information. |
-| **02** | **Objectives** | Write one general objective and three to five specific objectives tied to the system's tasks and algorithms. |
-| **03** | **1. Business Process** | Describe the organization, current process, problems, proposed features, scope, and delimitations. |
-| **04** | **2. Data Structures and Algorithms Applied** | Explain the concept, application, justification, operations, and complexity of each of the five selected topics. |
-| **05** | **3. System Flowchart** | Draft the main system flowchart and its step-by-step flow description. |
-| **06** | **5.1 Theoretical Analysis** | Analyze best, average, and worst-case running time and space complexity. Explain how the results are derived. |
-| **07** | **Appendix A. Source Code** | Implement student records, subject selection, and the main menu. |
-| **08** | **Appendix A. Source Code** | Implement the enrollment queue and first-in, first-out processing. |
-| **09** | **Appendix A. Source Code** | Implement final grade entry, updates, and stack-based undo. |
-| **10** | **Appendix A. Source Code** | Implement linear search, insertion sort, and input validation. |
-| **11** | **4. Output** | Test every feature and invalid input handling. Capture actual outputs and check that the flowchart matches the program. |
-| **12** | **5.2 Experimental Analysis** | Record the test setup, measure at least two operations across increasing input sizes, average repeated runs, and plot the measured times. |
-| **13** | **5.3 Comparison of Theoretical and Experimental Results** | Compare measured growth with the theoretical predictions and explain differences. |
-| **14** | **6. Conclusion and Recommendations** | Assess the objectives, summarize the results, and recommend specific improvements. |
-| **15** | **7. References and Appendices A–C** | Complete references, source and timing code, team contributions, repository details, and build instructions. |
-
-> **Current priority:** Complete the theoretical documentation in Phases 01–06. Coding begins with Phase 07.
+| Phase | Work |
+| :---: | :--- |
+| **01** | Complete the theoretical documentation and system design. |
+| **02** | Implement student records and the main menu. |
+| **03** | Implement enrollment processing with a queue. |
+| **04** | Implement grade entry and stack-based undo. |
+| **05** | Implement searching, sorting, and input validation. |
+| **06** | Test the program and capture actual outputs. |
+| **07** | Measure performance and complete the documentation. |
 
 ## Performance Analysis
 
