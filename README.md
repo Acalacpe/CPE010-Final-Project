@@ -83,6 +83,20 @@ This project applies arrays, a stack, a queue, linear search, and insertion sort
 
 The project will examine the best, average, and worst-case time complexity and the space complexity of its main operations. Experimental measurements will be collected after implementation and compared with the theoretical analysis.
 
+## Project Structure
+
+| Location | Purpose |
+| :--- | :--- |
+| [`src/`](src/) | Application source files and main menu |
+| [`include/`](include/) | Header files for student records, stacks, queues, searching, and sorting |
+| [`benchmarks/`](benchmarks/) | Separate code for performance measurements |
+| [`tests/`](tests/) | Test cases and sample inputs |
+| [`docs/flowcharts/`](docs/flowcharts/) | System flowcharts |
+| [`docs/screenshots/`](docs/screenshots/) | Actual program output screenshots |
+| [`docs/performance/`](docs/performance/) | Measured results and performance graphs |
+
+The folders currently contain placeholders. Source files will be added in small steps during implementation.
+
 ## Build and Run
 
 Build and run instructions will be added after implementation.
