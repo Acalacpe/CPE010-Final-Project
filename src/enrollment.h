@@ -85,8 +85,8 @@ void addRequest() {
         std::cout << "Rejected: " << s.id << " already has a pending request.\n";
         return;
     }
-    s.name = askText("Full name (LN, FN M.I): ");
-    s.course = askText("Course: ");
+    s.name = askName("Full name (LN, FN M.I): ", "Name");
+    s.course = askName("Course: ", "Course");
     s.year = askInt("Year level (1-5): ", 1, 5);
 
     bool any = false;
