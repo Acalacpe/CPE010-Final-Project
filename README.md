@@ -4,17 +4,17 @@
 
 <h1>Student Enrollment<br>&amp; Grade Record System</h1>
 
-<p>A C++ console application planned to support student enrollment, subject selection,<br>and final grade recording for a school registrar.</p>
+<p>A C++ console application for student enrollment, subject selection,<br>and final grade recording for a school registrar.</p>
 
 <p>
 <img src="https://img.shields.io/badge/Language-C%2B%2B-00599C?style=for-the-badge" alt="Language: C++">
 <img src="https://img.shields.io/badge/Interface-Console-334155?style=for-the-badge" alt="Interface: Console">
-<img src="https://img.shields.io/badge/Stage-Design-0F766E?style=for-the-badge" alt="Stage: Design">
+<img src="https://img.shields.io/badge/Stage-Testing-0F766E?style=for-the-badge" alt="Stage: Testing">
 </p>
 
 <p>
 <a href="#overview">Overview</a> &nbsp;·&nbsp;
-<a href="#planned-features">Features</a> &nbsp;·&nbsp;
+<a href="#features">Features</a> &nbsp;·&nbsp;
 <a href="#data-structures-and-algorithms">Algorithms</a> &nbsp;·&nbsp;
 <a href="#system-rules">System Rules</a> &nbsp;·&nbsp;
 <a href="#development-plan">Development Plan</a>
@@ -24,26 +24,26 @@
 
 ---
 
-> **Status:** Documentation and design are in progress. Implementation has not started.
+> **Status:** Core features are implemented. Regression tests cover enrollment, grade history, and multi-file integration. Performance measurements and final documentation are pending.
 
 ## Overview
 
 This project applies arrays, a stack, a queue, linear search, and insertion sort to a student enrollment and grade recording process. The design focuses on a small, single-user console program with clear operations and input validation.
 
-## Planned Features
+## Features
 
-| Feature | Planned Behavior |
+| Feature | Behavior |
 | :--- | :--- |
 | **Enrollment** | Add an enrollment request with student details and selected subjects. |
 | **Request Processing** | Process enrollment requests in first-in, first-out order. |
 | **Grade Management** | Enter or update one final grade per enrolled subject. |
 | **Student Search** | Search for a student by student number. |
 | **Alphabetical Records** | Display enrolled students alphabetically by name. |
-| **Grade Undo** | Undo the latest grade change. |
+| **Grade Undo** | Undo the latest grade change across all students from the main menu. |
 
 ## Data Structures and Algorithms
 
-| Topic | Planned Application |
+| Topic | Application |
 | :--- | :--- |
 | **Arrays** | Store student details, selected subjects, and grades |
 | **Stack** | Restore the previous grade when undoing a change |
@@ -53,17 +53,19 @@ This project applies arrays, a stack, a queue, linear search, and insertion sort
 
 ## System Rules
 
-| Item | Planned Behavior |
+| Item | Behavior |
 | :--- | :--- |
-| **Student numbers** | Entered manually; duplicates are rejected |
+| **Student numbers** | Entered manually, digits only; duplicates are rejected |
 | **Available subjects** | English, Mathematics, and Science |
 | **Subject selection** | One or more available subjects per student |
 | **Grade entry** | One final grade per enrolled subject |
-| **Grade range** | **0–100** |
+| **Grade range** | Whole numbers from **0–100** |
 | **Passing grade** | **75** |
 | **Unassigned grades** | Displayed as **Not yet graded** |
 | **Users** | One registrar user |
 | **Data storage** | In memory for the current session |
+| **Application capacity** | 100 enrolled students and 50 pending requests |
+| **Grade history capacity** | 50 changes; further updates are blocked until an undo frees space |
 
 > Records are cleared when the program closes.
 
@@ -95,11 +97,51 @@ The project will examine the best, average, and worst-case time complexity and t
 | [`docs/screenshots/`](docs/screenshots/) | Actual program output screenshots |
 | [`docs/performance/`](docs/performance/) | Measured results and performance graphs |
 
-The folders currently contain placeholders. Source files will be added in small steps during implementation.
+Source files are in `src/`, public headers are in `include/`, and regression checks are in `tests/`. Benchmark and output folders are reserved for measured results and actual screenshots.
+
+## Main Menu
+
+| Choice | Action |
+| :---: | :--- |
+| 1 | Add enrollment request |
+| 2 | Process the next request |
+| 3 | Display students alphabetically |
+| 4 | Search a student, view a grade report, or enter/update grades |
+| 5 | Undo the latest grade change across all students |
+| 0 | Exit |
+
+Undo is global and follows last-in, first-out order. It is available from the main menu rather than inside a selected student's screen. Reports show **Not yet graded** for unassigned grades and pending overall remarks while any enrolled subject is ungraded.
 
 ## Build and Run
 
-Build and run instructions will be added after implementation.
+Use a C++17 compiler such as `g++`. Run these commands from the repository root.
+
+**Windows PowerShell**
+
+```powershell
+New-Item -ItemType Directory -Force build | Out-Null
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude src/main.cpp src/enrollment.cpp src/algorithms.cpp src/helpers.cpp src/grades.cpp -o build/enrollment.exe
+.\build\enrollment.exe
+```
+
+**Linux or Git Bash**
+
+```bash
+mkdir -p build
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude src/*.cpp -o build/enrollment-system
+./build/enrollment-system
+```
+
+## Regression Tests
+
+```powershell
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude tests/regression.cpp tests/link_headers.cpp src/enrollment.cpp src/algorithms.cpp src/helpers.cpp src/grades.cpp -o build/regression-tests.exe
+.\build\regression-tests.exe
+```
+
+On Linux or Git Bash, run `./build/regression-tests.exe` after compiling. Keep assertions enabled; do not add `-DNDEBUG` when building the tests.
+
+The shared search and sort functions accept an array and count, allowing separate benchmark datasets larger than the console program's capacity. Benchmark timings have not been collected yet.
 
 ---
 
