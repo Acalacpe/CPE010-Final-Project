@@ -15,6 +15,21 @@ std::string askText(const std::string& prompt) {
     }
 }
 
+std::string askName(const std::string& prompt, const std::string& label) {
+    while (true) {
+        std::string s = askText(prompt);
+        bool ok = true;
+        bool hasLetter = false;
+        for (size_t i = 0; i < s.size(); i++) {
+            char c = s[i];
+            if (std::isalpha((unsigned char)c)) hasLetter = true;
+            else if (c != ' ' && c != ',' && c != '.' && c != '-' && c != '\'') ok = false;
+        }
+        if (ok && hasLetter) return s;
+        std::cout << "  Invalid. " << label << " must have letters only (no numbers or symbols).\n";
+    }
+}
+
 int askInt(const std::string& prompt, int lo, int hi) {
     while (true) {
         std::cout << prompt;
