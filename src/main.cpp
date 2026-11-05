@@ -14,7 +14,7 @@ int main() {
         std::cout << "4. Enter / Update Final Grades\n";
         std::cout << "0. Exit Test\n";
         
-        int choice = askInt("Enter choice (0-3): ", 0, 3);
+        int choice = askInt("Enter choice (0-3): ", 0, 4);
          if (choice == 0) {
             std::cout << "Exiting test driver.\n";
             break;
