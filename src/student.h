@@ -12,10 +12,10 @@ const std::string SUBJECT_NAMES[NUM_SUBJECTS] = {"English", "Mathematics", "Scie
 struct Student {
     std::string id;              
     std::string name;
-    std::string course;
+    std::string program;
     int year = 0;
     bool enrolled[NUM_SUBJECTS] = {false, false, false};
-    int grades[NUM_SUBJECTS] = {NOT_GRADED, NOT_GRADED, NOT_GRADED};
+    float grades[NUM_SUBJECTS] = {NOT_GRADED, NOT_GRADED, NOT_GRADED};
 };
 
 #endif
