@@ -30,11 +30,22 @@ bool pendingHasId(const std::string& id) {
     return false;
 }
 
+bool nameGreater(const std::string& a, const std::string& b) {
+    size_t i = 0;
+    while (i < a.size() && i < b.size()) {
+        char x = std::tolower((unsigned char)a[i]);
+        char y = std::tolower((unsigned char)b[i]);
+        if (x != y) return x > y;
+        i++;
+    }
+    return a.size() > b.size();
+}
+
 void insertionSort() {
     for (int i = 1; i < studentCount; i++) {
         Student key = students[i];
         int j = i - 1;
-        while (j >= 0 && students[j].name > key.name) {
+        while (j >= 0 && nameGreater(students[j].name, key.name)) {
             students[j + 1] = students[j];
             j--;
         }
