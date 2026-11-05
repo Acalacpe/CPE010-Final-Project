@@ -11,7 +11,7 @@ int main() {
         std::cout << "1. Add enrollment request\n";
         std::cout << "2. Process next request\n";
         std::cout << "3. Display students alphabetically\n";
-        std::cout << "4. Enter / Update Final Grades\n";
+        std::cout << "4. Search student\n";
         std::cout << "0. Exit Test\n";
         
         int choice = askInt("Enter choice (0-3): ", 0, 4);
@@ -22,7 +22,7 @@ int main() {
         else if (choice == 1) addRequest();
         else if (choice == 2) processNext();
         else if (choice == 3) displayStudents();
-        else if (choice == 4) updateGrade();
+        else if (choice == 4) searchStudent();
     }
  
     return 0;
