@@ -86,7 +86,7 @@ void addRequest() {
         return;
     }
     s.name = askName("Full name (LN, FN M.I): ", "Name");
-    s.course = askName("Course: ", "Course");
+    s.program = askName("Program: ", "Program");
     s.year = askInt("Year level (1-5): ", 1, 5);
 
     bool any = false;

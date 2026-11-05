@@ -5,6 +5,63 @@
 #include <string>
 #include "student.h"
 
+struct GradeChange {
+    std::string studentId;
+    int subjectIndex;
+    int oldGrade;
+    int newGrade;
+};
+
+const int MAX_STACK_SIZE = 50;
+
+struct GradeStack {
+    GradeChange changes[MAX_STACK_SIZE];
+    int top = -1;
+
+    bool isFull() const {
+        return top >= MAX_STACK_SIZE - 1;
+    }
+
+    bool isEmpty() const {
+        return top == -1;
+    }
+
+    bool push(const GradeChange& change) {
+        if (isFull()) {
+            std::cout << "Grade history stack overflow!\n";
+            return false;
+        }
+        changes[++top] = change;
+        return true;
+    }
+
+    bool pop(GradeChange& poppedChange) {
+        if (isEmpty()) {
+            std::cout << "No grade updates to undo!\n";
+            return false;
+        }
+        poppedChange = changes[top--];
+        return true;
+    }
+
+    bool peek(GradeChange& topChange) const {
+        if (isEmpty()) return false;
+        topChange = changes[top];
+        return true;
+    }
+};
+
+inline GradeStack gradeHistoryStack;
+
+inline void recordGradeEdit(const std::string& studentId, int subjectIndex, int oldGrade, int newGrade) {
+    GradeChange gc = { studentId, subjectIndex, oldGrade, newGrade };
+    gradeHistoryStack.push(gc);
+}
+
+inline bool undoLastGradeEdit(GradeChange& undoneChange) {
+    return gradeHistoryStack.pop(undoneChange);
+}
+
 std::string askText(const std::string& prompt) {
     std::string s;
     while (true) {
@@ -62,9 +119,7 @@ std::string gradeText(const Student& s, int sub) {
 }
 
 void printStudent(const Student& s) {
-    std::cout << s.name << " | ID: " << s.id << " | " << s.course << ", Year " << s.year << "\n";
-    for (int i = 0; i < NUM_SUBJECTS; i++)
-        std::cout << "      " << SUBJECT_NAMES[i] << ": " << gradeText(s, i) << "\n";
+    std::cout << s.name << " | ID: " << s.id << " | " << s.program << ", Year " << s.year << "\n";
 }
 
 #endif
