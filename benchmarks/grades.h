@@ -90,8 +90,8 @@ void searchStudent() {
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
         std::cout << "\nTime taken to search = "
-              << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()
-              << " microseconds" << std::endl;
+              << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()
+              << " milliseconds" << std::endl;
 
         std::cout << "Student not found.\n";
         return;
@@ -106,8 +106,8 @@ void searchStudent() {
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
     std::cout << "\nTime taken to search (Linear Search) = "
-              << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()
-              << " microseconds" << std::endl;
+              << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()
+              << " milliseconds" << std::endl;
 
     while (true) {
         std::cout << "\n----------------------------------------\n";
