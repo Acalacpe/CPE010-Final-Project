@@ -1,11 +1,11 @@
-#include "grades.h"
+#ifndef GRADES_H
+#define GRADES_H
 
-#include <iomanip>
 #include <iostream>
+#include <iomanip>
 #include "enrollment.h"
-#include "helpers.h"
 
-void printGradeReportTable(int studentIndex) {
+inline void printGradeReportTable(int studentIndex) {
     if (studentIndex < 0 || studentIndex >= studentCount) return;
     const Student& student = students[studentIndex];
     std::cout << "\n--- Final Grade Report: " << student.name
@@ -47,7 +47,7 @@ void printGradeReportTable(int studentIndex) {
     }
 }
 
-bool updateStudentGrade(int studentIndex, int subjectIndex, int newGrade) {
+inline bool updateStudentGrade(int studentIndex, int subjectIndex, int newGrade) {
     if (studentIndex < 0 || studentIndex >= studentCount) {
         std::cout << "Student not found.\n";
         return false;
@@ -68,41 +68,42 @@ bool updateStudentGrade(int studentIndex, int subjectIndex, int newGrade) {
         std::cout << "Grade is unchanged.\n";
         return false;
     }
-    if (!recordGradeEdit(student.id, subjectIndex, oldGrade, newGrade)) {
-        std::cout << "Grade history is full. Grade was not changed. Undo a change first.\n";
+
+    GradeChange change = {student.id, subjectIndex, oldGrade, newGrade};
+    if (!student.gradeHistory.push(change)) {
+        std::cout << "Grade history is full. Grade was not changed.\n";
         return false;
     }
+
     student.grades[subjectIndex] = newGrade;
     std::cout << "Grade updated successfully for " << SUBJECT_NAMES[subjectIndex] << "!\n";
     return true;
 }
 
-bool undoLatestGradeEdit() {
+inline bool undoLatestGradeEdit(int studentIndex) {
+    if (studentIndex < 0 || studentIndex >= studentCount) return false;
+
+    Student& student = students[studentIndex];
     GradeChange change;
-    if (!gradeHistoryStack.peek(change)) {
-        std::cout << "No grade updates to undo.\n";
+    
+    if (!student.gradeHistory.pop(change)) {
+        std::cout << "No grade updates to undo for this student.\n";
         return false;
     }
 
-    int index = linearSearch(change.studentId);
-    if (index == -1 || change.subjectIndex < 0 || change.subjectIndex >= NUM_SUBJECTS
-        || !students[index].enrolled[change.subjectIndex]) {
-        std::cout << "Cannot restore this change. Grade history was kept.\n";
-        return false;
-    }
-    if (!undoLastGradeEdit(change)) return false;
-    students[index].grades[change.subjectIndex] = change.oldGrade;
+    student.grades[change.subjectIndex] = change.oldGrade;
 
     std::cout << "\n--- Undo Successful ---\nReverted grade for "
-              << students[index].name << " (" << change.studentId << ", "
+              << student.name << " (" << change.studentId << ", "
               << SUBJECT_NAMES[change.subjectIndex] << ") back to: ";
     if (change.oldGrade == NOT_GRADED) std::cout << "Not yet graded\n";
     else std::cout << change.oldGrade << "\n";
-    printGradeReportTable(index);
+
+    printGradeReportTable(studentIndex);
     return true;
 }
 
-static void editGrades(int studentIndex) {
+inline void editGrades(int studentIndex) {
     while (true) {
         std::cout << "\nSelect Subject to Edit:\n";
         for (int i = 0; i < NUM_SUBJECTS; i++) {
@@ -126,7 +127,7 @@ static void editGrades(int studentIndex) {
     }
 }
 
-void searchStudent() {
+inline void searchStudent() {
     std::cout << "\n--- Search Student ---\n";
     if (studentCount == 0) {
         std::cout << "No enrolled students available.\n";
@@ -139,10 +140,17 @@ void searchStudent() {
     }
     printStudent(students[index]);
     while (true) {
-        std::cout << "\n1. Display grade report\n2. Enter or edit grade\n0. Back to main menu\n";
-        int option = askInt("Select option (0-2): ", 0, 2);
+        std::cout << "\n1. Display grade report\n";
+        std::cout << "2. Enter or edit grade\n";
+        std::cout << "3. Undo last grade edit\n";
+        std::cout << "0. Back to main menu\n";
+
+        int option = askInt("Select option (0-3): ", 0, 3);
         if (option == 0) return;
-        if (option == 1) printGradeReportTable(index);
-        else editGrades(index);
+        else if (option == 1) printGradeReportTable(index);
+        else if (option == 2) editGrades(index);
+        else if (option == 3) undoLatestGradeEdit(index);
     }
 }
+
+#endif

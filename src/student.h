@@ -1,22 +1,66 @@
-#include "helpers.h"
+#ifndef STUDENT_H
+#define STUDENT_H
 
+#include <string>
+#include <iostream>
 #include <cctype>
 #include <cstdlib>
-#include <iostream>
 
-GradeStack gradeHistoryStack;
+const int NUM_SUBJECTS = 3;
+const int NOT_GRADED = -1;
+const int PASSING_GRADE = 75;
 
-bool recordGradeEdit(const std::string& studentId, int subjectIndex,
-                     int oldGrade, int newGrade) {
-    GradeChange change = {studentId, subjectIndex, oldGrade, newGrade};
-    return gradeHistoryStack.push(change);
-}
+const std::string SUBJECT_NAMES[NUM_SUBJECTS] = {
+    "English", "Mathematics", "Science"
+};
 
-bool undoLastGradeEdit(GradeChange& change) {
-    return gradeHistoryStack.pop(change);
-}
+struct GradeChange {
+    std::string studentId;
+    int subjectIndex;
+    int oldGrade;
+    int newGrade;
+};
 
-std::string askText(const std::string& prompt) {
+const int MAX_STACK_SIZE = 50;
+
+struct GradeStack {
+    GradeChange changes[MAX_STACK_SIZE];
+    int top = -1;
+
+    bool isFull() const { return top >= MAX_STACK_SIZE - 1; }
+    bool isEmpty() const { return top == -1; }
+
+    bool push(const GradeChange& change) {
+        if (isFull()) return false;
+        changes[++top] = change;
+        return true;
+    }
+
+    bool pop(GradeChange& change) {
+        if (isEmpty()) return false;
+        change = changes[top--];
+        return true;
+    }
+
+    bool peek(GradeChange& change) const {
+        if (isEmpty()) return false;
+        change = changes[top];
+        return true;
+    }
+};
+
+struct Student {
+    std::string id;
+    std::string name;
+    std::string program;
+    int year = 0;
+    bool enrolled[NUM_SUBJECTS] = {false, false, false};
+    int grades[NUM_SUBJECTS] = {NOT_GRADED, NOT_GRADED, NOT_GRADED};
+    GradeStack gradeHistory;
+};
+
+
+inline std::string askText(const std::string& prompt) {
     while (true) {
         std::cout << prompt;
         std::string value;
@@ -26,7 +70,7 @@ std::string askText(const std::string& prompt) {
     }
 }
 
-std::string askName(const std::string& prompt, const std::string& label) {
+inline std::string askName(const std::string& prompt, const std::string& label) {
     while (true) {
         std::string value = askText(prompt);
         bool valid = true;
@@ -43,7 +87,7 @@ std::string askName(const std::string& prompt, const std::string& label) {
     }
 }
 
-int askInt(const std::string& prompt, int lo, int hi) {
+inline int askInt(const std::string& prompt, int lo, int hi) {
     while (true) {
         std::cout << prompt;
         std::string value;
@@ -60,7 +104,7 @@ int askInt(const std::string& prompt, int lo, int hi) {
     }
 }
 
-bool askYesNo(const std::string& prompt) {
+inline bool askYesNo(const std::string& prompt) {
     while (true) {
         std::string value = askText(prompt);
         if (value == "y" || value == "Y") return true;
@@ -69,14 +113,18 @@ bool askYesNo(const std::string& prompt) {
     }
 }
 
-std::string gradeText(const Student& student, int subjectIndex) {
+inline std::string gradeText(const Student& student, int subjectIndex) {
     if (!student.enrolled[subjectIndex]) return "Not enrolled";
     if (student.grades[subjectIndex] == NOT_GRADED) return "Not yet graded";
     return std::to_string(student.grades[subjectIndex])
         + (student.grades[subjectIndex] >= PASSING_GRADE ? " (Passed)" : " (Failed)");
 }
 
-void printStudent(const Student& student) {
+inline void printStudent(const Student& student) {
     std::cout << student.name << " | ID: " << student.id << " | "
               << student.program << ", Year " << student.year << "\n";
 }
+
+
+
+#endif
