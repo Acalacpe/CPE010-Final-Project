@@ -22,10 +22,6 @@
 
 </div>
 
----
-
-> **Status:** Core features are implemented. Regression tests cover enrollment, grade history, and multi-file integration. Performance measurements and final documentation are pending.
-
 ## Overview
 
 This project applies arrays, a stack, a queue, linear search, and insertion sort to a student enrollment and grade recording process. The design focuses on a small, single-user console program with clear operations and input validation.
