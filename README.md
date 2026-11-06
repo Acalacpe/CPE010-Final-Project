@@ -90,7 +90,6 @@ The project will examine the best, average, and worst-case time complexity and t
 | Location | Purpose |
 | :--- | :--- |
 | [`src/`](src/) | Application source files and main menu |
-| [`include/`](include/) | Header files for student records, stacks, queues, searching, and sorting |
 | [`benchmarks/`](benchmarks/) | Separate code for performance measurements |
 | [`tests/`](tests/) | Test cases and sample inputs |
 | [`docs/flowcharts/`](docs/flowcharts/) | System flowcharts |
@@ -106,11 +105,8 @@ Source files are in `src/`, public headers are in `include/`, and regression che
 | 1 | Add enrollment request |
 | 2 | Process the next request |
 | 3 | Display students alphabetically |
-| 4 | Search a student, view a grade report, or enter/update grades |
-| 5 | Undo the latest grade change across all students |
+| 4 | Search a student, view a grade report, or enter/update/undo grades |
 | 0 | Exit |
-
-Undo is global and follows last-in, first-out order. It is available from the main menu rather than inside a selected student's screen. Reports show **Not yet graded** for unassigned grades and pending overall remarks while any enrolled subject is ungraded.
 
 ## Build and Run
 
