@@ -116,7 +116,7 @@ Use a C++17 compiler such as `g++`. Run these commands from the repository root.
 
 ```powershell
 New-Item -ItemType Directory -Force build | Out-Null
-g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude src/main.cpp src/enrollment.cpp src/algorithms.cpp src/helpers.cpp src/grades.cpp -o build/enrollment.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Isrc src/main.cpp -o build/enrollment.exe
 .\build\enrollment.exe
 ```
 
@@ -124,18 +124,21 @@ g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude src/main.cpp src/enrollment.cp
 
 ```bash
 mkdir -p build
-g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude src/*.cpp -o build/enrollment-system
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Isrc src/main.cpp -o build/enrollment-system
 ./build/enrollment-system
 ```
 
 ## Regression Tests
 
 ```powershell
-g++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude tests/regression.cpp tests/link_headers.cpp src/enrollment.cpp src/algorithms.cpp src/helpers.cpp src/grades.cpp -o build/regression-tests.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Isrc tests/regression.cpp -o build/regression-tests.exe
 .\build\regression-tests.exe
 ```
 
-On Linux or Git Bash, run `./build/regression-tests.exe` after compiling. Keep assertions enabled; do not add `-DNDEBUG` when building the tests.
+```bash
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Isrc tests/regression.cpp -o build/regression-tests
+./build/regression-tests
+```
 
 The shared search and sort functions accept an array and count, allowing separate benchmark datasets larger than the console program's capacity. Benchmark timings have not been collected yet.
 
