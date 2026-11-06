@@ -1,31 +1,35 @@
-#include "enrollment.h"
+#ifndef ENROLLMENT_H
+#define ENROLLMENT_H
 
 #include <iostream>
+#include "student.h"
 #include "algorithms.h"
-#include "helpers.h"
 
-Student students[MAX_STUDENTS];
-int studentCount = 0;
-Student requests[MAX_REQUESTS];
-int qFront = 0;
-int qCount = 0;
+const int MAX_STUDENTS = 100;
+const int MAX_REQUESTS = 50;
 
-int linearSearch(const std::string& id) {
+inline Student students[MAX_STUDENTS];
+inline int studentCount = 0;
+inline Student requests[MAX_REQUESTS];
+inline int qFront = 0;
+inline int qCount = 0;
+
+inline int linearSearch(const std::string& id) {
     return linearSearch(students, studentCount, id);
 }
 
-bool pendingHasId(const std::string& id) {
+inline bool pendingHasId(const std::string& id) {
     for (int i = 0; i < qCount; i++) {
         if (requests[(qFront + i) % MAX_REQUESTS].id == id) return true;
     }
     return false;
 }
 
-void insertionSort() {
+inline void insertionSort() {
     insertionSort(students, studentCount);
 }
 
-void addRequest() {
+inline void addRequest() {
     std::cout << "\n--- Add Enrollment Request ---\n";
     if (qCount == MAX_REQUESTS) {
         std::cout << "Queue is full. Process a request first.\n";
@@ -71,7 +75,7 @@ void addRequest() {
     std::cout << "Request added successfully! (Pending position: " << qCount << ").\n";
 }
 
-void processNext() {
+inline void processNext() {
     std::cout << "\n--- Process Next Request ---\n";
     if (qCount == 0) {
         std::cout << "No pending requests to process.\n";
@@ -89,7 +93,7 @@ void processNext() {
     qCount--;
 }
 
-void displayStudents() {
+inline void displayStudents() {
     std::cout << "\n--- Enrolled Students (Alphabetical A-Z) ---\n";
     if (studentCount == 0) {
         std::cout << "No enrolled students yet.\n";
@@ -101,3 +105,5 @@ void displayStudents() {
         printStudent(students[i]);
     }
 }
+
+#endif

@@ -1,15 +1,18 @@
-#include "algorithms.h"
+#ifndef ALGORITHMS_H
+#define ALGORITHMS_H
 
+#include <string>
 #include <cctype>
+#include "student.h"
 
-int linearSearch(const Student records[], int count, const std::string& id) {
+inline int linearSearch(const Student records[], int count, const std::string& id) {
     for (int i = 0; i < count; i++) {
         if (records[i].id == id) return i;
     }
     return -1;
 }
 
-bool nameGreater(const std::string& a, const std::string& b) {
+inline bool nameGreater(const std::string& a, const std::string& b) {
     std::size_t i = 0;
     while (i < a.size() && i < b.size()) {
         int x = std::tolower(static_cast<unsigned char>(a[i]));
@@ -20,7 +23,7 @@ bool nameGreater(const std::string& a, const std::string& b) {
     return a.size() > b.size();
 }
 
-void insertionSort(Student records[], int count) {
+inline void insertionSort(Student records[], int count) {
     for (int i = 1; i < count; i++) {
         Student key = records[i];
         int j = i - 1;
@@ -31,3 +34,5 @@ void insertionSort(Student records[], int count) {
         records[j + 1] = key;
     }
 }
+
+#endif
